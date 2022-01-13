@@ -1,0 +1,11 @@
+{
+  "name": "teamly2",
+  "version": "1.0.0",
+  "description": "The backend for Teamly. The app to manage and track your organization",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jordan Blount",
+  "license": "MIT"
+}
