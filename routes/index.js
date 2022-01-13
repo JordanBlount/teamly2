@@ -4,10 +4,10 @@ const router = express.Router();
 // const Pusher = require("pusher");
 
 // const pusher = new Pusher({
-//   appId: "1329103",
-//   key: "5ca7fc6c430a615aad79",
-//   secret: "56a109dabd32bea8a6b6",
-//   cluster: "us2",
+//   appId: process.env.PUSHER_APP_ID,
+//   key: process.env.PUSHER_KEY,
+//   secret: process.env.PUSHER_SECRET,
+//   cluster: process.env.PUSHER_CLUSTER,
 //   useTLS: true
 // });
 
