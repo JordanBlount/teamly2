@@ -4,13 +4,12 @@ require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
 const routes = require('./routes/index.js');
-
-const app = express();
 
 // Connects to MongoDB
 //require('./config/db');
+
+const app = express();
 
 // Body parser middleware
 app.use(bodyParser.json());
