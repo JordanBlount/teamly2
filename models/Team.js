@@ -11,7 +11,7 @@ const TeamSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 1,
-        trim
+        trim: true
     },
     type: {
         type: BigInt,
