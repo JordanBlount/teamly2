@@ -35,7 +35,9 @@ const TabBar = () => {
                     </svg>
                 } />
                 {/* TODO: Create a basic profile icon quickly using TailwindCSS */}
-                <NavItem />
+                <NavItem icon={
+                    <span class="w-7 h-7 bg-green-600 rounded-full flex justify-center items-center text-sm mx-auto">JB</span>
+                } />
             </nav>
         </div>
     )
