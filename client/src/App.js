@@ -1,13 +1,11 @@
 import './App.css';
+import NavBar from './components/nav/NavBar';
 
 function App() {
   return (
-    <div className="App">
-      <nav>
-        <ul>
-          <li><a href="test">Test</a></li>
-        </ul>
-      </nav>
+    <div className="App min-h-screen pb-[72px] overflow-y-hidden">
+        Lol
+        <NavBar />
     </div>
   );
 }
