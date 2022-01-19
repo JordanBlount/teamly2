@@ -5,6 +5,7 @@ import Section from '../components/Section'
 
 const Chat = () => {
 
+    // This is test data only.
     const people = [
         {
             name: "Gloria Hopkins",
@@ -23,6 +24,9 @@ const Chat = () => {
     const createNewChat = () => {
         //
     }
+
+    // This will be holding all the information regarding out conversations.
+    const [conversations, setConversations] = useState([]);
 
     return (
         <>

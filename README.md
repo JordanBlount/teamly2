@@ -1,5 +1,24 @@
-This is the second version of my Teamly app.
+# Teamly
 
-This version is built using React.js, Node.js, Express, MongoDB, and Pusher (for realtime features).
+A organization management system along with task, teams, chat, and etc.
 
-Will update this readme file with specifics soon.
+This is a project of mine to test out some new technologies along with my UI design skills (trying to get better)
+
+
+## Mockups
+These were all created using Figma. I spent about 2 hours trying to get ideas out along with doing some research into other apps/designs. 
+
+![Mockups in figma](https://github.com/JordanBlount/teamly2/blob/main/client/screenshots/mockups.png)
+
+## Authors
+
+- [@jordantblount](https://jordanblount.com)
+
+  
+## Tech Stack
+
+**Client:** React.js, TailwindCSS, React Router, Redux
+
+**Server:** MongoDB, Express, Pusher (realtime features) 
+
+  
