@@ -52,9 +52,9 @@ const Overview = () => {
                         <p className="text-sm text-[#8B8B8B]">Decemeber 9, 2021</p>
                         <div className="mt-4 flex items-center">
                             <div className="flex relative w-[98px] h-[45px] hover:bg-gray-500">
-                                <img className="w-[45px] h-[45px] rounded-full absolute left-[-3px]" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Picture of Kevin" />
-                                <img className="w-[45px] h-[45px] rounded-full absolute left-[26px]" src="https://randomuser.me/api/portraits/women/75.jpg" alt="Picture of Marissa" />
-                                <img className="w-[45px] h-[45px] rounded-full absolute left-[55px]" src="https://randomuser.me/api/portraits/women/37.jpg" alt="Picture of Lauren" />
+                                <img className="w-[45px] h-[45px] rounded-full absolute left-[-3px]" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Kevin" />
+                                <img className="w-[45px] h-[45px] rounded-full absolute left-[26px]" src="https://randomuser.me/api/portraits/women/75.jpg" alt="Marissa" />
+                                <img className="w-[45px] h-[45px] rounded-full absolute left-[55px]" src="https://randomuser.me/api/portraits/women/37.jpg" alt="Lauren" />
                             </div>
                             <p className="ml-2 text-md text-[#8B8B8B]">Software Engineers</p>
                         </div>
@@ -64,8 +64,8 @@ const Overview = () => {
                         <p className="text-sm text-[#8B8B8B]">Decemeber 10, 2021</p>
                         <div className="mt-4 flex items-center">
                             <div className="flex relative w-[54px] h-[45px] hover:bg-gray-500">
-                                <img className="w-[45px] h-[45px] rounded-full absolute left-[-3px]" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Picture of Kevin" />
-                                <img className="w-[45px] h-[45px] rounded-full absolute left-[26px]" src="https://randomuser.me/api/portraits/women/75.jpg" alt="Picture of Marissa" />
+                                <img className="w-[45px] h-[45px] rounded-full absolute left-[-3px]" src="https://randomuser.me/api/portraits/men/75.jpg" alt="Kevin" />
+                                <img className="w-[45px] h-[45px] rounded-full absolute left-[26px]" src="https://randomuser.me/api/portraits/women/75.jpg" alt="Marissa" />
                             </div>
                             <p className="ml-6 text-md text-[#8B8B8B]">Executives</p>
                         </div>
