@@ -17,6 +17,9 @@ const TeamSchema = new mongoose.Schema({
         type: BigInt,
         required: true
     }, 
+    threads: [],
+    members: [],
+    leadership: [], // Will be embedded in here
     _organizationId: {
         type: mongoose.Types.ObjectId,
         required: true

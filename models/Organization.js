@@ -7,6 +7,24 @@ const OrganizationSchema = new mongoose.Schema({
         minlength: 1,
         trim: true
     }, 
+    teams_count: {
+        type: BigInt,
+    },
+    members_count: {
+        type: BigInt
+    },
+    teams: [{
+
+    }],
+    tasks: {
+        completed: 0,
+        inProgress: 0,
+    },
+    inviteId: {
+        type: BigInt
+    },
+    leadership: null,
+    canModify: null,
     /* 
         TODO: Make this auto-generated. This can be given to someone to be
         so that they can sign up for a specific organization. That way,
