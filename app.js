@@ -8,7 +8,7 @@ const routes = require('./routes/index.js');
 const OrganizationController = require('./routes/OrganizationController.js');
 
 // Connects to MongoDB
-//require('./config/db');
+require('./config/db');
 
 const app = express();
 

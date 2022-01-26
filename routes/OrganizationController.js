@@ -3,15 +3,40 @@ const { Organization } = require('../models');
 let OrganizationController = {
     
     find: async (req, res) => {
-        let org = await Organization.find({ _id: req.params._id });
-        res.json(org);
-        console.log("Organization found");
+        try {
+            let org = await Organization.findOne({ _id: req.params.orgId });
+            if(org) {
+                res.json(org)
+            } else {
+                res.status(401).json("Organization does not exist.")
+            }
+        } catch(err) {
+            console.log(err)
+            res.status(500).json("Server error.")
+        }
     },
 
+    // FIXME: Catch error for when title is not present
     create: async (req, res) => {
-        // let org = await Organization.create(req);
-        // res.status(200);
-        res.send('THIS IS WORKING');
+        const { title } = req.body;
+        if(title === '' || title === null) {
+            res.status(401).json("Does not contain a title.")
+        } else {
+            let newOrg = new Organization(req.body);
+            newOrg.save();
+        }
+    },
+
+    update: async (req, res) => {
+        try {
+            let org = await Organization.find({ _id: req.params.orgId })
+            if(!org) {
+                res.status(400).json("This organization does not exist.")
+            } 
+        } catch(err) {
+            console.log(err)
+            res.status(500).json("Server error.")
+        }
     }
 
 }

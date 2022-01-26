@@ -29,6 +29,4 @@ const ThreadMessageSchema = new mongoose.Schema({
 
 const ThreadMessage = mongoose.model("ThreadMessage", ThreadMessageSchema);
 
-module.exports = {
-    ThreadMessage
-}
+module.exports = ThreadMessage;

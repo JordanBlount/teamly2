@@ -3,6 +3,7 @@ const router = express.Router();
 const OrganizationController = require('./OrganizationController');
 const TaskController = require('./TaskController');
 const TeamController = require('./TeamController');
+const ThreadController = require('./ThreadController');
 const ActivityController = require('./ActivityController');
 
 router.get('/', (req, res) => {
@@ -10,9 +11,10 @@ router.get('/', (req, res) => {
 });
 
 // Routes for organization
-router.get('/org', (req, res) => {
-    res.sendStatus(200);
-});
+router.get('/org/:orgId', OrganizationController.find)
+router.post('/org', OrganizationController.create);
+router.put('/org/:orgId', OrganizationController.update);
+
 
 
 // Routes for teams
@@ -24,9 +26,10 @@ router.get('/team/:teamId', TeamController.findById)
 router.get('/team/:teamId/tasks', TeamController.findTasks)
 router.get('/team/:teamId/members', TeamController.findMembers)
 
-router.get('/team/:teamId/threads')
-router.post('/team/:teamId/threads/:threadId')
-router.delete('/team/:teamId/threads/:threadId')
+router.get('/team/:teamId/threads', ThreadController.findAll)
+router.put('/team/:teamId/threads', ThreadController.create)
+router.post('/team/:teamId/threads/:threadId', ThreadController.update)
+router.delete('/team/:teamId/threads/:threadId', ThreadController.delete)
 
 router.get("/teams/:teamId/members")
 router.post('/teams/:teamId/members')

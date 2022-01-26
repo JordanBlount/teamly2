@@ -1,7 +1,7 @@
 const { Thread } = require('../models/');
 
-const ThreadController = {
-    find: async (req, res) => {
+let ThreadController = {
+    findAll: async (req, res) => {
         
     },
     findById: async (req, res) => {

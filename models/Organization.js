@@ -7,14 +7,29 @@ const OrganizationSchema = new mongoose.Schema({
         minlength: 1,
         trim: true
     }, 
-    teams_count: Number,
-    members_count: Number,
+    teams_count: {
+        type: Number,
+        default: 0
+    },
+    members_count: {
+        type: Number,
+        default: 0
+    },
     teams: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Team' }],
     tasks: {
-        completed: 0,
-        inProgress: 0,
+        completed: {
+            type: Number,
+            default: 0
+        },
+        inProgress: {
+            type: Number,
+            default: 0
+        }
     },
-    inviteId: Number,
+    inviteId: {
+        type: Number,
+        default: 0
+    },
     leadership: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Member' }],
     canModify: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Member' }],
 },
@@ -24,6 +39,4 @@ const OrganizationSchema = new mongoose.Schema({
 
 const Organization = mongoose.model("Organization", OrganizationSchema);
 
-module.exports = {
-    Organization
-}
+module.exports = Organization;
