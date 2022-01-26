@@ -3,19 +3,23 @@ const mongoose = require('mongoose');
 const MemberSchema = new mongoose.Schema({
     name: String,
     email: String,
-    password: String, // TODO: May not be necessary for now
-    jobTitle: String,
-    address: [{
+    jobtitle: String,
+    teams: []
+    // name: String,
+    // email: String,
+    // password: String, // TODO: May not be necessary for now
+    // jobTitle: String,
+    // address: [{
 
-    }],
-    phoneNumber: [{
+    // }],
+    // phoneNumber: [{
 
-    }],
-    birthday: Date,
-    nativeLanguage: "",
-    languages: [],
-    teams: [],
-    socialMediaHandles: []
+    // }],
+    // birthday: Date,
+    // nativeLanguage: "",
+    // languages: [],
+    // teams: [],
+    // socialMediaHandles: []
 },
 {
     timestamps: true
