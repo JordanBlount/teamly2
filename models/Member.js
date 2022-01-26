@@ -14,7 +14,8 @@ const MemberSchema = new mongoose.Schema({
     birthday: Date,
     nativeLanguage: "",
     languages: [],
-    teams: []
+    teams: [],
+    socialMediaHandles: []
 },
 {
     timestamps: true
