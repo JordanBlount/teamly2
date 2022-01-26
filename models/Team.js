@@ -17,6 +17,14 @@ const TeamSchema = new mongoose.Schema({
         type: Number,
         required: true
     }, 
+    memberCount: {
+        type: Number,
+        default: 0
+    },
+    threadCount: {
+        type: Number,
+        default: 0
+    },
     threads: [mongoose.Types.ObjectId],
     members: [mongoose.Types.ObjectId], //Add rights to this as well
     leadership: [mongoose.Types.ObjectId],

@@ -5,16 +5,17 @@ const TaskController = require('./TaskController');
 const TeamController = require('./TeamController');
 const ThreadController = require('./ThreadController');
 const ActivityController = require('./ActivityController');
+const MemberController = require('./MemberController');
 
 router.get('/', (req, res) => {
     res.send("Hello world.");
 });
 
 // Routes for organization
+router.get('/org', OrganizationController.findAll)
 router.get('/org/:orgId', OrganizationController.find)
 router.post('/org', OrganizationController.create);
 router.put('/org/:orgId', OrganizationController.update);
-
 
 
 // Routes for teams
@@ -31,23 +32,31 @@ router.put('/team/:teamId/threads', ThreadController.create)
 router.post('/team/:teamId/threads/:threadId', ThreadController.update)
 router.delete('/team/:teamId/threads/:threadId', ThreadController.delete)
 
-router.get("/teams/:teamId/members")
-router.post('/teams/:teamId/members')
-router.put('/teams/:teamId/members/:memberId')
-router.delete('/teams/:teamId/:memberId')
+router.get("/teams/:teamId/members", TeamController.findMembers)
+router.post('/teams/:teamId/members', TeamController.addMember)
+router.put('/teams/:teamId/members/:memberId', TeamController.updateMember)
+router.delete('/teams/:teamId/:memberId', TeamController.removeMember)
 
 // Routes for task
-router.get('/org/:orgId/tasks', TaskController.findById)
-router.get('/org/:orgId/tasks/all', TaskController.findAll)
+router.get('/org/:orgId/tasks', TaskController.findAll)
+router.get('/org/:orgId/tasks/:taskId', TaskController.findById)
 router.post('/org/:orgId/tasks', TaskController.create)
 router.put('/org/:orgId/tasks', TaskController.update)
 router.delete('/org/:orgId/tasks', TaskController.delete)
 
-router.get('/org/:orgId/activities', ActivityController.findById)
-router.get('/org/:orgId/activities/all', ActivityController.find)
+// Routes for activities
+router.get('/org/:orgId/activities', ActivityController.find)
+router.get('/org/:orgId/activities/:activityId', ActivityController.findById)
 router.post('/org/:orgId/activities', ActivityController.create)
-router.put('/org/:orgId/activities', ActivityController.update)
-router.delete('/org/:orgId/activities', ActivityController.delete)
+router.put('/org/:orgId/activities/:activityId', ActivityController.update)
+router.delete('/org/:orgId/activities/:activityId', ActivityController.delete)
+
+// Routes for members
+router.get('/org/:orgId/members', MemberController.findAll)
+router.get('/org/:orgId/members/:memberId', MemberController.findById)
+router.post('/org/:orgId/members', MemberController.create)
+router.put('/org/:orgId/members/:memberId', MemberController.update)
+router.delete('/org/:orgId/members/:memberId', MemberController.delete)
 
 
 module.exports = router;
