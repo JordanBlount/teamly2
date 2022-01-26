@@ -6,7 +6,7 @@ const ThreadMessageSchema = new mongoose.Schema({
         default: ""
     },
     sender: mongoose.Types.ObjectId,
-    replies: [],
+    replies: [mongoose.Types.ObjectId],
     isReply: {
         type: Boolean,
         default: false
@@ -14,10 +14,9 @@ const ThreadMessageSchema = new mongoose.Schema({
     repliedToMsgId: {
         type: mongoose.Schema.ObjectId
     },
-    publishedDate: {
-        type: Date,
-        required: true
-    },
+},
+{
+    timestamps: true
 });
 
 const ThreadMessage = mongoose.model("ThreadMessage", ThreadMessageSchema);

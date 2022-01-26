@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 
 const ChatSchema = new mongoose.Schema({
-    participates: [],
+    participates: [mongoose.Types.ObjectId],
     messageCount: 0,
-    messages: [],
-    createdOn: null,
+    messages: [mongoose.Types.ObjectId],
     startedBy: null,
+},
+{
+    timestamps: true
 });
 
 const Chat = mongoose.model("Chat", ChatSchema);

@@ -7,32 +7,19 @@ const OrganizationSchema = new mongoose.Schema({
         minlength: 1,
         trim: true
     }, 
-    teams_count: {
-        type: BigInt,
-    },
-    members_count: {
-        type: BigInt
-    },
-    teams: [{
-
-    }],
+    teams_count: Number,
+    members_count: Number,
+    teams: [{ type: Schema.Types.ObjectId, ref: 'Team' }],
     tasks: {
         completed: 0,
         inProgress: 0,
     },
-    inviteId: {
-        type: BigInt
-    },
-    leadership: null,
-    canModify: null,
-    /* 
-        TODO: Make this auto-generated. This can be given to someone to be
-        so that they can sign up for a specific organization. That way,
-        this app can be used for multiple organizations and not just one.
-    */
-    // inviteId: {
-    //     type: BigInt,
-    // }
+    inviteId: Number,
+    leadership: [{ type: Schema.Types.ObjectId, ref: 'Member' }],
+    canModify: [{ type: Schema.Types.ObjectId, ref: 'Member' }],
+},
+{
+    timestamps: true
 });
 
 const Organization = mongoose.model("Organization", OrganizationSchema);

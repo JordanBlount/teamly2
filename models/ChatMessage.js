@@ -13,11 +13,10 @@ const ChatMessageSchema = new mongoose.Schema({
     repliedToMsgId: {
         type: mongoose.Schema.ObjectId
     },
-    sentTimestamp: {
-        type: Date,
-        required: true
-    },
-    seenBy: [] //Ids of everyone who has read the message
+    seenBy: [mongoose.Types.ObjectId] //Ids of everyone who has read the message
+},
+{
+    timestamps: true
 });
 
 const ChatMessage = mongoose.model("ChatMessage", ChatMessageSchema);

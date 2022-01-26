@@ -17,13 +17,16 @@ const TeamSchema = new mongoose.Schema({
         type: BigInt,
         required: true
     }, 
-    threads: [],
-    members: [],
-    leadership: [], // Will be embedded in here
+    threads: [mongoose.Types.ObjectId],
+    members: [mongoose.Types.ObjectId],
+    leadership: [mongoose.Types.ObjectId],
     _organizationId: {
         type: mongoose.Types.ObjectId,
         required: true
     }
+},
+{
+    timestamps: true
 });
 
 const Team = mongoose.model("Team", TeamSchema);

@@ -15,6 +15,9 @@ const MemberSchema = new mongoose.Schema({
     nativeLanguage: "",
     languages: [],
     teams: []
+},
+{
+    timestamps: true
 });
 
 const Member = mongoose.model("Member", MemberSchema);
