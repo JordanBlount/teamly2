@@ -28,10 +28,12 @@ router.get('/team/:teamId/tasks', TeamController.findTasks)
 router.get('/team/:teamId/members', TeamController.findMembers)
 
 router.get('/team/:teamId/threads', ThreadController.findAll)
+router.get('/team/:teamId/threads/:threadId', ThreadController.findById)
 router.put('/team/:teamId/threads', ThreadController.create)
 router.post('/team/:teamId/threads/:threadId', ThreadController.update)
 router.delete('/team/:teamId/threads/:threadId', ThreadController.delete)
 
+// Routes for interacting with members on a Team
 router.get("/teams/:teamId/members", TeamController.findMembers)
 router.post('/teams/:teamId/members', TeamController.addMember)
 router.put('/teams/:teamId/members/:memberId', TeamController.updateMember)
