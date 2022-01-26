@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const ChatSchema = new mongoose.Schema({
-    participates: [mongoose.Types.ObjectId],
+    participates: [{ type: mongoose.Types.ObjectId, ref: 'Member' }],
     messageCount: 0,
-    messages: [mongoose.Types.ObjectId],
-    startedBy: [mongoose.Types.ObjectId],
+    messages: [{ type: mongoose.Types.ObjectId, ref: 'ChatMessage' }],
+    startedBy: mongoose.Types.ObjectId,
 },
 {
     timestamps: true

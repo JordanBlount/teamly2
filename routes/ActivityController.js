@@ -1,19 +1,19 @@
 const { Activity } = require('../models/');
 
 let ActivityController = {
-    findActivities: async (req, res) => {
+    find: async (req, res) => {
         
     },
-    findActivityById: async (req, res) => {
+    findById: async (req, res) => {
         
     },
-    createActivity: async (req, res) => {
+    create: async (req, res) => {
         
     },
-    updateActivity: async (req, res) => {
+    update: async (req, res) => {
         
     },
-    deleteActivity: async (req, res) => {
+    delete: async (req, res) => {
         
     },
 }

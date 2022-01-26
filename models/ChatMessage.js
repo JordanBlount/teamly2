@@ -5,15 +5,15 @@ const ChatMessageSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
-    sender: [mongoose.Types.ObjectId],
+    sender: [{ type: mongoose.Types.ObjectId, ref: 'Member'}],
     isReply: {
         type: Boolean,
         default: false
     },
     repliedToMsgId: {
-        type: mongoose.Types.ObjectId
+        type: { type: mongoose.Types.ObjectId, ref: 'ChatMessage' }
     },
-    seenBy: [mongoose.Types.ObjectId] //Ids of everyone who has read the message
+    seenBy: [{ type: mongoose.Types.ObjectId, ref: 'Member'}] //Ids of everyone who has read the message
 },
 {
     timestamps: true

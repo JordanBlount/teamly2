@@ -1,19 +1,19 @@
 const { Thread } = require('../models/');
 
 const ThreadController = {
-    findThreads: async (req, res) => {
+    find: async (req, res) => {
         
     },
-    findThreadById: async (req, res) => {
+    findById: async (req, res) => {
         
     },
-    createThread: async (req, res) => {
+    create: async (req, res) => {
         
     },
-    updateThread: async (req, res) => {
+    update: async (req, res) => {
         
     },
-    deleteThread: async (req, res) => {
+    delete: async (req, res) => {
         
     },
 }

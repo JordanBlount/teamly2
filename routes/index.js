@@ -40,11 +40,11 @@ router.post('/org/:orgId/tasks', TaskController.create)
 router.put('/org/:orgId/tasks', TaskController.update)
 router.delete('/org/:orgId/tasks', TaskController.delete)
 
-router.get('/org/:orgId/activities', ActivityController.findActivityById)
-router.get('/org/:orgId/activities/all', ActivityController.findActivities)
-router.post('/org/:orgId/activities', ActivityController.createActivity)
-router.put('/org/:orgId/activities', ActivityController.updateActivity)
-router.delete('/org/:orgId/activities', ActivityController.deleteActivity)
+router.get('/org/:orgId/activities', ActivityController.findById)
+router.get('/org/:orgId/activities/all', ActivityController.find)
+router.post('/org/:orgId/activities', ActivityController.create)
+router.put('/org/:orgId/activities', ActivityController.update)
+router.delete('/org/:orgId/activities', ActivityController.delete)
 
 
 module.exports = router;
