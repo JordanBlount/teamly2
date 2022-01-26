@@ -14,11 +14,11 @@ const TeamSchema = new mongoose.Schema({
         trim: true
     },
     type: {
-        type: BigInt,
+        type: Number,
         required: true
     }, 
     threads: [mongoose.Types.ObjectId],
-    members: [mongoose.Types.ObjectId],
+    members: [mongoose.Types.ObjectId], //Add rights to this as well
     leadership: [mongoose.Types.ObjectId],
     _organizationId: {
         type: mongoose.Types.ObjectId,

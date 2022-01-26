@@ -15,7 +15,7 @@ const TaskSchema = new mongoose.Schema({
         tasks: [mongoose.Types.ObjectId],
         mainTaskId: mongoose.Types.ObjectId // Provides a way of finding what this belongs to
     },
-    createdBy: null,
+    createdBy: [mongoose.Types.ObjectId],
     dueDate: Date,
     teams: [mongoose.Types.ObjectId],
     assignedTo: [mongoose.Types.ObjectId],

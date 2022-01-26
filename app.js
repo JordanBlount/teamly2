@@ -5,6 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const routes = require('./routes/index.js');
+const OrganizationController = require('./routes/OrganizationController.js');
 
 // Connects to MongoDB
 //require('./config/db');
@@ -27,4 +28,4 @@ app.listen(port, () => {
 /*
     Handling server routes (API)
 */
-app.get('/', routes)
+app.use('/', routes)

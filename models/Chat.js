@@ -4,7 +4,7 @@ const ChatSchema = new mongoose.Schema({
     participates: [mongoose.Types.ObjectId],
     messageCount: 0,
     messages: [mongoose.Types.ObjectId],
-    startedBy: null,
+    startedBy: [mongoose.Types.ObjectId],
 },
 {
     timestamps: true

@@ -9,14 +9,14 @@ const OrganizationSchema = new mongoose.Schema({
     }, 
     teams_count: Number,
     members_count: Number,
-    teams: [{ type: Schema.Types.ObjectId, ref: 'Team' }],
+    teams: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Team' }],
     tasks: {
         completed: 0,
         inProgress: 0,
     },
     inviteId: Number,
-    leadership: [{ type: Schema.Types.ObjectId, ref: 'Member' }],
-    canModify: [{ type: Schema.Types.ObjectId, ref: 'Member' }],
+    leadership: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Member' }],
+    canModify: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Member' }],
 },
 {
     timestamps: true

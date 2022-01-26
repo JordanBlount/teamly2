@@ -12,7 +12,7 @@ const ThreadMessage = require('./ThreadMessage');
 
 const Chat = require('./Chat');
 
-const ChatMessage = require('./ChatMessages');
+const ChatMessage = require('./ChatMessage');
 
 module.exports = {
     Organization,

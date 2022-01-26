@@ -8,9 +8,9 @@ const ThreadSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
-    authors: [{ type: Schema.Types.ObjectId, ref: 'Member' }],
-    comments: [{ type: Schema.Types.ObjectId, ref: 'ThreadMessage' }],
-    seenBy: [{ type: Schema.Types.ObjectId, ref: 'Member' }], //Ids of everyone who has read the message
+    authors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Member' }],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ThreadMessage' }],
+    seenBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Member' }], //Ids of everyone who has read the message
     _teamId: mongoose.Types.ObjectId
 },
 {
