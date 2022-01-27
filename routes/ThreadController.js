@@ -82,7 +82,7 @@ let ThreadController = {
                 res.sendStatus(200).json(deletedThread);
                 // Removes it from all Teams
                 Team
-                    .updateMany({ threads: threadId }, { $pull: { threads: threadId }, $inc: { threadCount: -1} })
+                    .updateMany({ threads: req.params.threadId }, { $pull: { threads: req.params.threadId }, $inc: { threadCount: -1} })
                     .catch(err => {
                         res.send(err);
                     })

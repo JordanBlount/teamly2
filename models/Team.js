@@ -25,6 +25,10 @@ const TeamSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    taskCount: {
+        type: Number,
+        default: 0
+    },
     threads: [mongoose.Types.ObjectId],
     members: [mongoose.Types.ObjectId],
     tasks: [{ type: mongoose.Types.ObjectId, ref: 'Task'}], //Add rights to this as well

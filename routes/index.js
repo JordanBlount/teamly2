@@ -21,7 +21,7 @@ router.put('/org/:orgId', OrganizationController.update);
 // Routes for teams
 router.get('/teams', TeamController.findAll)
 router.post('/teams', TeamController.create);
-router.put('/teams', TeamController.update)
+router.put('/teams/:teamId', TeamController.update)
 
 router.get('/teams/:teamId', TeamController.find)
 router.get('/teams/:teamId/tasks', TeamController.findTasks)
@@ -41,10 +41,11 @@ router.delete('/teams/:teamId/:memberId', TeamController.removeMember)
 
 // Routes for task
 router.get('/org/:orgId/tasks', TaskController.findAll)
-router.get('/org/:orgId/tasks/:taskId', TaskController.findById)
+router.get('/org/:orgId/tasks/:taskId', TaskController.find)
+router.get('/org/:orgId/tasks/:teamId', TaskController.findAllByTeamId) // Make sure these two don't conflict
 router.post('/org/:orgId/tasks', TaskController.create)
-router.put('/org/:orgId/tasks', TaskController.update)
-router.delete('/org/:orgId/tasks', TaskController.delete)
+router.put('/org/:orgId/tasks/:taskId', TaskController.update)
+router.delete('/org/:orgId/tasks/:taskId', TaskController.delete)
 
 // Routes for activities
 router.get('/org/:orgId/activities', ActivityController.find)

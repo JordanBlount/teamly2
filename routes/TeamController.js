@@ -4,12 +4,12 @@ let TeamController = {
     findAll: async (req, res) => {
         try {
             let teams = await Team.find();
-            if(teams) {
+            if (teams) {
                 res.status(200).json(teams)
             } else {
                 res.status(401).json("There are no teams.")
             }
-        } catch(err) {
+        } catch (err) {
             console.log(err)
             res.status(500).json("Server error.")
         }
@@ -17,12 +17,12 @@ let TeamController = {
     find: async (req, res) => {
         try {
             let team = await Team.findOne({ _id: req.params.orgId });
-            if(team) {
+            if (team) {
                 res.status(200).json(team)
             } else {
                 res.status(401).json("Team does not exist.")
             }
-        } catch(err) {
+        } catch (err) {
             console.log(err)
             res.status(500).json("Server error.")
         }
@@ -55,15 +55,30 @@ let TeamController = {
         })
     },
     update: async (req, res) => {
-        res.send("Testing put (update) request")
+        if (req.params?.teamId === undefined) return res.sendStatus(400).json("Did not include team id.")
+        Team
+            .findByIdAndUpdate(req.params.teamId, req.body, { new: true })
+            .then((updatedTeam) => {
+                res.sentStatus(200);
+            })
+            .catch((err) => {
+                if (err instanceof mongoose.Error.ValidationError) {
+                    console.log("An error occured while validating.");
+                    // Return details to be seen on client side
+                    res.status(422).json(err);
+                } else {
+                    console.log(err)
+                    res.status(500).json("Server error.");
+                }
+            })
     },
     findTasks: async (req, res) => {
         Team
-        .find({ _id: req.params.teamId }, { tasks: 1 })
-        .then((err, teamObj) => {
-            if (err) return res.status(500).json(err)
-            return res.status(200).json(teamObj);
-        })
+            .find({ _id: req.params.teamId }, { tasks: 1 })
+            .then((err, teamObj) => {
+                if (err) return res.status(500).json(err)
+                return res.status(200).json(teamObj);
+            })
     },
     findMembers: async (req, res) => {
         Team
@@ -75,11 +90,11 @@ let TeamController = {
 
     },
     addMember: async (req, res) => {
-        if(req.params?.memberId === undefined) return res.send(400).json("Did not include member id to update.") 
+        if (req.params?.memberId === undefined) return res.send(400).json("Did not include member id to update.")
         Team
-            .findByIdAndUpdate({ _id: req.params.teamId}, 
-                { $push: { members: req.body.memberId }, $inc: { team_count:  1} }, 
-                { new: true})
+            .findByIdAndUpdate({ _id: req.params.teamId },
+                { $push: { members: req.body.memberId }, $inc: { team_count: 1 } },
+                { new: true })
             .then((updatedTeam) => {
                 res.send(updatedTeam)
             })
