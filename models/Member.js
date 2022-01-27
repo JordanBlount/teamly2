@@ -24,7 +24,11 @@ const MemberSchema = new mongoose.Schema({
     tasks: [{
         type: mongoose.Types.ObjectId,
         ref: 'Task'
-    }]
+    }],
+    _organizationId: {
+        type: mongoose.Types.ObjectId,
+        ref: "Organization"
+    }
     // name: String,
     // email: String,
     // password: String, // TODO: May not be necessary for now

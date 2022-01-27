@@ -5,7 +5,7 @@ let ChatMessageController = {
         if (req.params?.chatId === undefined) return res.status(400).json("Does not contain a chat id.");
         ChatMessage
             .find({ _chatId: req.params.chatId }).sort({ date: -1 })
-            .then((err, messsages) => {
+            .then(messages => {
                 res.status(200).json(messages)
             })
             .catch(err => {
@@ -17,7 +17,7 @@ let ChatMessageController = {
         if (req.params?.messageId === undefined) return res.status(400).json("Does not contain message id.");
         ChatMessage
             .findById(req.params.messageId)
-            .then((err, chat) => {
+            .then(chat => {
                 res.status(200).json(chat)
             })
             .catch(err => {
