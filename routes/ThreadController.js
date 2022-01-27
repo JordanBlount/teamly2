@@ -23,7 +23,7 @@ let ThreadController = {
     create: async (req, res) => {
         if (req.params?.teamId === undefined) return res.status(400).json("This team does not exist.")
         if (req.params?.threadId === undefined) return res.send(400).json("Did not include thread id.")
-        let thread = new Thread(req.body)
+        let thread = new Thread({...req.body, _teamId: teamId})
         thread.save(err => {
             if (err) {
                 if (err instanceof mongoose.Error.ValidationError) {
@@ -54,7 +54,7 @@ let ThreadController = {
         Thread
             .findByIdAndUpdate(req.params.threadId, req.body, { new: true })
             .then((updatedThread) => {
-                res.send(updatedThread)
+                res.sentStatus(200);
             })
             .catch((err) => {
                 if (err instanceof mongoose.Error.ValidationError) {
@@ -68,23 +68,29 @@ let ThreadController = {
             })
     },
     delete: async (req, res) => {
-        // Archive
+        // TODO: Add archive feature
+        if (req.params?.teamId === undefined) {
+            return res.status(400).json("Did not include the team id.")
+        }
         if (req.params?.threadId === undefined) {
             return res.status(400).json("Did not include the ihread id.")
         }
-        let thread = await Thread.findOne({ _id: req.params.threadId })
-        if (!thread) {
-            return res.status(400).json("This thread does not exist or does not contain this member");
-        }
-        // thread.update({ _id: req.params.teamId },
-        //     { $pull: { threads: req.params.threadId }, $inc: { threadCount: -1 } },
-        //     { new: true })
-        //     .then((updatedTeam) => {
-        //         res.send(updatedTeam)
-        //     })
-        //     .catch(err => {
-        //         res.json(err);
-        // })
+        // Deletes the thread
+        Thread
+            .findOneAndDelete({ _id: req.params.threadId })
+            .then(deletedThread => {
+                res.sendStatus(200).json(deletedThread);
+                // Removes it from all Teams
+                Team
+                    .updateMany({ threads: threadId }, { $pull: { threads: threadId }, $inc: { threadCount: -1} })
+                    .catch(err => {
+                        res.send(err);
+                    })
+                
+            })
+            .catch(err => {
+                res.send(err)
+            })
     },
 }
 

@@ -8,7 +8,7 @@ const ActivityController = require('./ActivityController');
 const MemberController = require('./MemberController');
 
 router.get('/', (req, res) => {
-    res.send("Hello world.");
+    res.send("Hey y'all.");
 });
 
 // Routes for organization
@@ -19,19 +19,19 @@ router.put('/org/:orgId', OrganizationController.update);
 
 
 // Routes for teams
-router.get('/team', TeamController.find)
-router.post('/team', TeamController.create);
-router.put('/team', TeamController.update)
+router.get('/teams', TeamController.findAll)
+router.post('/teams', TeamController.create);
+router.put('/teams', TeamController.update)
 
-router.get('/team/:teamId', TeamController.findById)
-router.get('/team/:teamId/tasks', TeamController.findTasks)
-router.get('/team/:teamId/members', TeamController.findMembers)
+router.get('/teams/:teamId', TeamController.find)
+router.get('/teams/:teamId/tasks', TeamController.findTasks)
+router.get('/teams/:teamId/members', TeamController.findMembers)
 
-router.get('/team/:teamId/threads', ThreadController.findAll)
-router.get('/team/:teamId/threads/:threadId', ThreadController.findById)
-router.put('/team/:teamId/threads', ThreadController.create)
-router.post('/team/:teamId/threads/:threadId', ThreadController.update)
-router.delete('/team/:teamId/threads/:threadId', ThreadController.delete)
+router.get('/teams/:teamId/threads', ThreadController.findAll)
+router.get('/teams/:teamId/threads/:threadId', ThreadController.findById)
+router.post('/teams/:teamId/threads', ThreadController.create)
+router.put('/teams/:teamId/threads/:threadId', ThreadController.update)
+router.delete('/teams/:teamId/threads/:threadId', ThreadController.delete)
 
 // Routes for interacting with members on a Team
 router.get("/teams/:teamId/members", TeamController.findMembers)

@@ -1,19 +1,69 @@
 const { Team } = require("../models")
 
 let TeamController = {
-    find: async (req, res) => {
-        res.send("Testing the team controller")
+    findAll: async (req, res) => {
+        try {
+            let teams = await Team.find();
+            if(teams) {
+                res.status(200).json(teams)
+            } else {
+                res.status(401).json("There are no teams.")
+            }
+        } catch(err) {
+            console.log(err)
+            res.status(500).json("Server error.")
+        }
     },
-    findById: async (req, res) => {
-
+    find: async (req, res) => {
+        try {
+            let team = await Team.findOne({ _id: req.params.orgId });
+            if(team) {
+                res.status(200).json(team)
+            } else {
+                res.status(401).json("Team does not exist.")
+            }
+        } catch(err) {
+            console.log(err)
+            res.status(500).json("Server error.")
+        }
     },
     create: async (req, res) => {
-        // let newTeam = Team.create(req.body);
-        // newTeam.save();
-        res.send("Testing post (create) request")
+        // TODO: Make the error handling better here
+        const { title, description, type } = req.body;
+        if (title === undefined || title === '') {
+            return res.status(401).json("Does not contain a title.")
+        }
+        if (description === undefined || description === '') {
+            return res.status(401).json("Does not have a description.")
+        }
+        if (type === undefined || type === -1) {
+            return res.status(401).json("Does not have a team type")
+        }
+        let newTeam = new Team(req.body);
+        newTeam.save(err => {
+            if (err) {
+                if (err instanceof mongoose.Error.ValidationError) {
+                    console.log("An error occured while validating.");
+                    // Return details to be seen on client side
+                    return res.status(422).json(err);
+                } else {
+                    console.log(err);
+                    return res.status(500).json(err);
+                }
+            }
+            res.status(200).json(newTeam);
+        })
     },
     update: async (req, res) => {
         res.send("Testing put (update) request")
+    },
+    findTasks: async (req, res) => {
+        Team
+        .find({ _id: req.params.teamId }, { tasks: 1 })
+        .then((err, teamObj) => {
+            if (err) return res.status(500).json(err)
+            return res.status(200).json(teamObj);
+        })
     },
     findMembers: async (req, res) => {
         Team
