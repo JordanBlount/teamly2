@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+// TODO: Turning this into a cluster of messages may be better
+//       I could save the messages for each day into a single document
 const ChatMessageSchema = new mongoose.Schema({
     body: { 
         type: String,

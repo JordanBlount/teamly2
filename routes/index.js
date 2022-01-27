@@ -63,13 +63,15 @@ router.post('/org/:orgId/members', MemberController.create)
 router.put('/org/:orgId/members/:memberId', MemberController.update)
 router.delete('/org/:orgId/members/:memberId', MemberController.delete)
 
-// Routers for chat
+// Route for chat
+router.get('/chat', ChatController.findAll);
 router.get('/chat/:memberId', ChatController.findAllByMemberId)
 router.get('/chat/:chatId', ChatController.find) // I may have to change this
 router.post('/chat', ChatController.create)
 router.put('/chat/:chatId', ChatController.update);
 router.delete('/chat/:chatId', ChatController.delete);
 
+// Routes for chat
 router.get('/chat/:chatId/messages', ChatMessageController.findAll)
 router.get('/chat/:chatId/messages/:messageId', ChatMessageController.find)
 router.post('/chat/:chatId/messages')

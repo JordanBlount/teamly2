@@ -13,7 +13,10 @@ const MemberSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    chats: [{ type: mongoose.Types.ObjectId, ref: 'Chat' }]
+    chats: [{ 
+        type: mongoose.Types.ObjectId, 
+        ref: 'Chat' 
+    }]
     // name: String,
     // email: String,
     // password: String, // TODO: May not be necessary for now
