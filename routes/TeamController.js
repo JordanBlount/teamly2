@@ -75,7 +75,7 @@ let TeamController = {
     findTasks: async (req, res) => {
         Team
             .find({ _id: req.params.teamId }, { tasks: 1 })
-            .then((err, teamObj) => {
+            .then(teamObj => {
                 if (err) return res.status(500).json(err)
                 return res.status(200).json(teamObj);
             })
@@ -83,7 +83,7 @@ let TeamController = {
     findMembers: async (req, res) => {
         Team
             .find({ _id: req.params.teamId }, { members: 1 })
-            .then((err, teamObj) => {
+            .then(teamObj => {
                 if (err) return res.status(500).json(err)
                 return res.status(200).json(teamObj);
             })
