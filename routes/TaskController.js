@@ -55,7 +55,6 @@ let TaskController = {
             .catch(err => {
 
             })
-
     },
     delete: async (req, res) => {
         if (req.params?.taskId === undefined) return res.sendStatus(400).json("Does not contain a task id.")

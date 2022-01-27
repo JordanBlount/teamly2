@@ -4,7 +4,7 @@ let ThreadController = {
     findAll: async (req, res) => {
         if (req.params?.teamId === undefined) return res.status(400).json("This team does not exist.")
         Team
-            .find(teamId, { threads: 1 })
+            .find(req.params.teamId, { threads: 1 })
             .then((err, threads) => {
                 if (err) return res.status(500).json(err)
                 return res.status(200).json(threads);
@@ -14,8 +14,11 @@ let ThreadController = {
         if (req.params?.teamId === undefined) return res.status(400).json("This team does not exist.")
         if (req.params?.threadId === undefined) return res.status(400).json("This thread does not exist.")
         Team
-            .findById(teamId, { threads: 1 })
-            .then((err, thread) => {
+            .findById(req.params.teamId, { threads: 1 })
+            .then((err, threads) => {
+                // threads should be an array which we can then filter through before returning the thread.
+                // TODO: Mongoose should definitely have a way of doing this
+                let thread = threads.filter((td) => td._id === req.params.teadId)
                 if (err) return res.status(500).json(err)
                 return res.status(200).json(thread);
             })

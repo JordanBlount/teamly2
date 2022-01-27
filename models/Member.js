@@ -4,7 +4,16 @@ const MemberSchema = new mongoose.Schema({
     name: String,
     email: String,
     jobtitle: String,
-    teams: []
+    teamCount: {
+        type: Number,
+        default: 0
+    },
+    teams: [],
+    chatCount: {
+        type: Number,
+        default: 0
+    },
+    chats: [{ type: mongoose.Types.ObjectId, ref: 'Chat' }]
     // name: String,
     // email: String,
     // password: String, // TODO: May not be necessary for now
