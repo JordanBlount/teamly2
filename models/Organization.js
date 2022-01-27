@@ -15,7 +15,10 @@ const OrganizationSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    teams: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Team' }],
+    teams: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Team' 
+    }],
     tasks: {
         completed: {
             type: Number,
@@ -30,8 +33,14 @@ const OrganizationSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    leadership: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Member' }],
-    canModify: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Member' }],
+    leadership: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Member' 
+    }],
+    canModify: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Member' 
+    }],
 },
 {
     timestamps: true

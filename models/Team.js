@@ -15,7 +15,7 @@ const TeamSchema = new mongoose.Schema({
     },
     type: {
         type: Number,
-        //required: true
+        required: true
     }, 
     memberCount: {
         type: Number,
@@ -29,10 +29,22 @@ const TeamSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    threads: [mongoose.Types.ObjectId],
-    members: [mongoose.Types.ObjectId],
-    tasks: [{ type: mongoose.Types.ObjectId, ref: 'Task'}], //Add rights to this as well
-    leadership: [mongoose.Types.ObjectId],
+    threads: [{ 
+        type: mongoose.Types.ObjectId,
+        ref: 'Thread' 
+    }],
+    members: [{ 
+        type: mongoose.Types.ObjectId,
+        ref: 'Member' 
+    }],
+    tasks: [{ //Add rights to this as well
+        type: mongoose.Types.ObjectId, 
+        ref: 'Task'
+    }],
+    leadership: [{ 
+        type: mongoose.Types.ObjectId, 
+        ref: 'Member' 
+    }],
     _organizationId: {
         type: mongoose.Types.ObjectId,
         //required: true

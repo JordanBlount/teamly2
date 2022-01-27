@@ -6,6 +6,14 @@ const TaskSchema = new mongoose.Schema({
         required: true
     },
     notes: String,
+    dueDate: {type: Date},
+    completed: {
+        type: Boolean,
+        default: false
+    },
+    completedOn: {
+        type: Date
+    },
     isSubtask: {
         type: Boolean,
         default: false,
@@ -15,9 +23,14 @@ const TaskSchema = new mongoose.Schema({
         tasks: [mongoose.Types.ObjectId],
         mainTaskId: mongoose.Types.ObjectId // Provides a way of finding what this belongs to
     },
-    createdBy: [mongoose.Types.ObjectId],
-    dueDate: Date,
-    teams: [mongoose.Types.ObjectId],
+    createdBy: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Member'
+    }],
+    teams: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Team'
+    }],
     assignedTo: [mongoose.Types.ObjectId],
     _organizationId: mongoose.Types.ObjectId
 },

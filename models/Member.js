@@ -16,6 +16,14 @@ const MemberSchema = new mongoose.Schema({
     chats: [{ 
         type: mongoose.Types.ObjectId, 
         ref: 'Chat' 
+    }],
+    taskCount: {
+        type: Number,
+        default: 0
+    }, 
+    tasks: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Task'
     }]
     // name: String,
     // email: String,

@@ -5,7 +5,10 @@ const ThreadMessageSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
-    sender: { type: mongoose.Types.ObjectId, ref: 'Member' },
+    sender: { 
+        type: mongoose.Types.ObjectId, 
+        ref: 'Member' 
+    },
     replies: [{
         body: String,
         name: String,

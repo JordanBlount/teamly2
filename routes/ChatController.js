@@ -13,8 +13,7 @@ let ChatController = {
             })
     },
     findAllByMemberId: async (req, res) => {
-        if (req.params?.memberId === undefined) 
-            return res.status(400).json("Does not contain member id.");
+        if (req.params?.memberId === undefined) return res.status(400).json("Does not contain member id.");
         Member
             .findById(req.params.memberId, { chats: 1 })
             .then(chats => {
@@ -26,8 +25,7 @@ let ChatController = {
 
     },
     find: async (req, res) => {
-        if (req.params?.chatId === undefined) 
-            return res.status(400).json("Does not contain chat id.");
+        if (req.params?.chatId === undefined) return res.status(400).json("Does not contain chat id.");
         Chat
             .findById(req.params.chatId)
             .then(chat => {
@@ -38,8 +36,7 @@ let ChatController = {
             })
     },
     create: async (req, res) => {
-        if(req.body?.startedBy === undefined) 
-            return res.status(400).json("Somehow no one started this chat.")
+        if(req.body?.startedBy === undefined) return res.status(400).json("Somehow no one started this chat.")
         let newChat = new Chat(req.body);
         newChat.save(err => {
             if(err) {
@@ -58,8 +55,7 @@ let ChatController = {
             .updateMany({ _id: { $all: newChat.participants } }, { $push: { chats: newChat._id, $inc: { chatCount: 1 } } })
     },
     update: async (req, res) => {
-        if (req.params?.chatId === undefined) 
-            return res.status(400).json("Does not contain chat id.");
+        if (req.params?.chatId === undefined) return res.status(400).json("Does not contain chat id.");
         Chat
             .findByIdAndUpdate(req.params.chatId, req.body, { new: true })
             .then(updatedChat => {
@@ -70,8 +66,7 @@ let ChatController = {
             })
     },
     delete: async (req, res) => {
-        if (req.params?.chatId === undefined) 
-            return res.status(400).json("Does not contain chat id.");
+        if (req.params?.chatId === undefined) return res.status(400).json("Does not contain chat id.");
         Chat
             .findByIdAndDelete(req.params.chatId)
             .then(deletedChat => {

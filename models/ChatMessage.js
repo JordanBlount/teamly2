@@ -7,16 +7,27 @@ const ChatMessageSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
-    sender: [{ type: mongoose.Types.ObjectId, ref: 'Member', required: true}],
+    sender: [{ 
+        type: mongoose.Types.ObjectId, 
+        ref: 'Member', 
+        required: true
+    }],
     isReply: {
         type: Boolean,
         default: false
     },
     repliedToMsgId: {
-        type: { type: mongoose.Types.ObjectId, ref: 'ChatMessage' }
+        type: mongoose.Types.ObjectId, 
+        ref: 'ChatMessage'
     },
-    seenBy: [{ type: mongoose.Types.ObjectId, ref: 'Member'}], //Ids of everyone who has read the message
-    _chatId: { type: mongoose.Types.ObjectId, ref: 'Chat' }
+    seenBy: [{ //Ids of everyone who has read the message
+        type: mongoose.Types.ObjectId, 
+        ref: 'Member'
+    }],
+    _chatId: { 
+        type: mongoose.Types.ObjectId, 
+        ref: 'Chat' 
+    }
 },
 {
     timestamps: true

@@ -8,10 +8,26 @@ const ThreadSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
-    authors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Member' }],
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ThreadMessage' }],
-    seenBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Member' }], //Ids of everyone who has read the message
-    _teamId: { type: mongoose.Types.ObjectId, ref: 'Team' }
+    authors: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Member' 
+    }],
+    comments: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'ThreadMessage' 
+    }],
+    seenBy: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Member' }], //Ids of everyone who has read the message
+    _teamId: { 
+        type: mongoose.Types.ObjectId, 
+        ref: 'Team' 
+    },
+    lastEdit: Date,
+    lastEditBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Member'
+    } // Should only be updated when the "body" is changed
 },
 {
     timestamps: true

@@ -25,7 +25,7 @@ let ThreadController = {
     },
     create: async (req, res) => {
         if (req.params?.teamId === undefined) return res.status(400).json("This team does not exist.")
-        if (req.params?.threadId === undefined) return res.send(400).json("Did not include thread id.")
+        if (req.params?.threadId === undefined) return res.status(400).json("Did not include thread id.")
         let thread = new Thread({...req.body, _teamId: teamId})
         thread.save(err => {
             if (err) {
@@ -53,7 +53,7 @@ let ThreadController = {
     },
     update: async (req, res) => {
         if (req.params?.teamId === undefined) return res.status(400).json("This team does not exist.")
-        if (req.params?.threadId === undefined) return res.send(400).json("Did not include thread id.")
+        if (req.params?.threadId === undefined) return res.status(400).json("Did not include thread id.")
         Thread
             .findByIdAndUpdate(req.params.threadId, req.body, { new: true })
             .then((updatedThread) => {
@@ -82,7 +82,7 @@ let ThreadController = {
         Thread
             .findOneAndDelete({ _id: req.params.threadId })
             .then(deletedThread => {
-                res.sendStatus(200).json(deletedThread);
+                res.status(200).json(deletedThread);
                 // Removes it from all Teams
                 Team
                     .updateMany({ threads: req.params.threadId }, { $pull: { threads: req.params.threadId }, $inc: { threadCount: -1} })

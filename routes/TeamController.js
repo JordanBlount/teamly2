@@ -55,7 +55,7 @@ let TeamController = {
         })
     },
     update: async (req, res) => {
-        if (req.params?.teamId === undefined) return res.sendStatus(400).json("Did not include team id.")
+        if (req.params?.teamId === undefined) return res.status(400).json("Did not include team id.")
         Team
             .findByIdAndUpdate(req.params.teamId, req.body, { new: true })
             .then((updatedTeam) => {

@@ -7,10 +7,16 @@ const ActivitySchema = new mongoose.Schema({
         type: String,
         default: ""
     },
-    authors: [{ type: mongoose.Types.ObjectId, ref: 'Member'}],
+    authors: [{ 
+        type: mongoose.Types.ObjectId,
+        ref: 'Member'
+    }],
     eventId: mongoose.Types.ObjectId, // So we an know what triggered this event and also link to it.
     appUsed: String, // In case this was generated from another app using our API
-    _organizationId: { type: mongoose.Types.ObjectId, ref: 'Organization'}
+    _organizationId: { 
+        type: mongoose.Types.ObjectId, 
+        ref: 'Organization'
+    }
 },
 {
     timestamps: true
