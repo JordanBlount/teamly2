@@ -39,25 +39,39 @@ let ChatController = {
         if (req.body?.startedBy === undefined) return res.status(400).json("Somehow no one started this chat.")
         if (req.body?.participants === undefined || req.body.participants.length <= 1) return res.status(400).json("A chat can not be started by only one person alone.")
 
-        // TODO: Add support to check if a chat already exist with all the following participants. If it does not, create a new one
-        // Chat.findOne({ participants: req.body.participants })
-        let newChat = new Chat(req.body);
-        newChat.save(err => {
-            if (err) {
-                if (err instanceof mongoose.Error.ValidationError) {
-                    console.log("An error occured while validating.");
-                    // Return details to be seen on client side
-                    return res.status(422).json(err);
+        Chat
+            // TODO: We need to check this for performance because it may be super costly.
+            // May be possible to try and do this on the client side before on the server side.
+            // We could check the "state" data to see if a conversation already exist and then
+            // create it. Also, due to pusher giving us realtime updates, we would not need to
+            // worry about date being stale. It would be available there.
+            .countDocuments({ participants: { $in: req.body.participants } }, { limit: 1 })
+            .then((count) => {
+                if (count > 0) {
+                    //console.log("Tried to create a chat that already exist.")
+                    return res.status(400).json("This chat already exists");
                 } else {
-                    console.log(err);
-                    return res.status(500).json(err);
+                    let newChat = new Chat(req.body);
+                    newChat.save(err => {
+                        if (err) {
+                            if (err instanceof mongoose.Error.ValidationError) {
+                                console.log("An error occured while validating.");
+                                // Return details to be seen on client side
+                                return res.status(422).json(err);
+                            } else {
+                                console.log(err);
+                                return res.status(500).json(err);
+                            }
+                        }
+                        res.status(200).json(newChat);
+                        // To get this to work, I had to use "$in" + "[...req.body.participants]"
+                        Member
+                            .updateMany({ _id: { $in: [...req.body.participants] } }, { $push: { chats: newChat._id }, $inc: { chatCount: 1 } })
+                            // Somehow chaining this onto the updateMany makes it work....
+                            .then(log => { });
+                    })
                 }
-            }
-            res.status(200).json(newChat);
-            // To get this to work, I had to use "$in" + "[...req.body.participants]"
-            Member
-                .updateMany({ _id: { $in: [...req.body.participants] } }, { $push: { chats: newChat._id }, $inc: { chatCount: 1 } })
-        })
+            })
     },
     update: async (req, res) => {
         if (req.params?.chatId === undefined) return res.status(400).json("Does not contain chat id.");
@@ -79,6 +93,7 @@ let ChatController = {
                 // TODO: Add pusher event to remove this chat from everyone's list
                 Member
                     .updateMany({ _id: { $in: [...req.body.participants] } }, { $pull: { chats: req.params.chatId }, $inc: { chatCount: -1 } })
+                    .then(log => { })
             })
             .catch(err => {
                 res.send(err)

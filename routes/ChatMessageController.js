@@ -49,9 +49,7 @@ let ChatMessageController = {
             console.log(newMessage._id)
             Chat
                 .findOneAndUpdate({ _id: req.params.chatId }, { $push: { messages: newMessage._id }, $inc: { messageCount: 1 }})
-                .then((something) => {
-                    console.log("This chat should have been updated correctly");
-                })
+                .then(log => {});
             // TODO: Add pusher event to send message to everyone in the chat.
         })
     },
