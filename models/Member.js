@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const MemberSchema = new mongoose.Schema({
     name: String,
     email: String,
-    jobtitle: String,
+    jobTitle: String,
+    profileImg: String, // I can create a default for this. I may 
     teamCount: {
         type: Number,
         default: 0

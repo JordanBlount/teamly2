@@ -5,7 +5,10 @@ const ChatSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId, 
         ref: 'Member'
     }],
-    messageCount: 0,
+    messageCount: {
+        type: Number,
+        default: 0
+    },
     messages: [{ 
         type: mongoose.Types.ObjectId, 
         ref: 'ChatMessage' 

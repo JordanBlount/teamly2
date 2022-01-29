@@ -27,7 +27,6 @@ let MemberController = {
     },
     create: async (req, res) => {
         if (req.params?.orgId === undefined) return res.status(400).json("Does not contain a organization id.");
-        if (req.params?.memberId === undefined) return res.status(400).json("Does not contain member id.");
         let newMember = new Member(req.body);
         newMember.save(err => {
             if (err) {

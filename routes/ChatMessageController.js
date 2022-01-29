@@ -4,7 +4,7 @@ let ChatMessageController = {
     findAll: async (req, res) => {
         if (req.params?.chatId === undefined) return res.status(400).json("Does not contain a chat id.");
         ChatMessage
-            .find({ _chatId: req.params.chatId }).sort({ date: -1 })
+            .find({ _chatId: req.params.chatId }).sort({ createdAt: -1 })
             .then(messages => {
                 res.status(200).json(messages)
             })
@@ -31,6 +31,7 @@ let ChatMessageController = {
         // Make it based on a date range and/or limit of messages (e.g. 10)
     },
     create: async (req, res) => {
+        if(req.params?.chatId === undefined) return res.status(400).json("Needs a chat Id.")
         if(req.body?.sender === undefined) return res.status(400).json("The sender field can not be empty")
         let newMessage = new ChatMessage(req.body);
         newMessage.save(err => {
@@ -45,6 +46,13 @@ let ChatMessageController = {
                 }
             }
             res.status(200).json(newMessage);
+            console.log(newMessage._id)
+            Chat
+                .findOneAndUpdate({ _id: req.params.chatId }, { $push: { messages: newMessage._id }, $inc: { messageCount: 1 }})
+                .then((something) => {
+                    console.log("This chat should have been updated correctly");
+                })
+            // TODO: Add pusher event to send message to everyone in the chat.
         })
     },
     update: async (req, res) => {
@@ -58,6 +66,7 @@ let ChatMessageController = {
             .catch(err => {
                 res.send(err)
             })
+        // TODO: Add pusher event to update message on client side.
     },
     delete: async (req, res) => {
         if (req.params?.chatId === undefined) return res.status(400).json("Does not contain chat id.");
@@ -70,6 +79,8 @@ let ChatMessageController = {
             .catch(err => {
                 res.send(err)
             })
+        // TODO: Add pusher event to delete message on client side. Replace with a "Deleted Message"
+        // text. Should be something super simple
     }
 }
 

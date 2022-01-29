@@ -64,8 +64,8 @@ router.put('/org/:orgId/members/:memberId', MemberController.update)
 router.delete('/org/:orgId/members/:memberId', MemberController.delete)
 
 // Route for chat
-router.get('/chat', ChatController.findAll);
-router.get('/chat/:memberId', ChatController.findAllByMemberId)
+router.get('/chat', ChatController.findAll); // TODO: Disable this route. It is unnecessary right now
+//router.get('/chat/:memberId', ChatController.findAllByMemberId)
 router.get('/chat/:chatId', ChatController.find) // I may have to change this
 router.post('/chat', ChatController.create)
 router.put('/chat/:chatId', ChatController.update);
@@ -74,9 +74,9 @@ router.delete('/chat/:chatId', ChatController.delete);
 // Routes for chat
 router.get('/chat/:chatId/messages', ChatMessageController.findAll)
 router.get('/chat/:chatId/messages/:messageId', ChatMessageController.find)
-router.post('/chat/:chatId/messages')
-router.put('/chat/:chatId/messages/:messageId')
-router.delete('/chat/:chatId/messages/:messageId')
+router.post('/chat/:chatId/messages', ChatMessageController.create)
+router.put('/chat/:chatId/messages/:messageId', ChatMessageController.update)
+router.delete('/chat/:chatId/messages/:messageId', ChatMessageController.delete)
 
 
 module.exports = router;
