@@ -44,8 +44,8 @@ const Conversation = (props) => {
                 {props.people.length > 1 ? (
                     <span className="relative w-16 h-16 rounded-full">
                         {props.people.slice(0, 3).map((person, index) => (
-                            // TODO: Add a unique key value here
-                            <img className={`w-8 h-8 rounded-full absolute ${getPosition(index, props.people.length)}`} src={person.profileImg} alt={person.name} />
+                            // TODO: Remove "Math.random()" and add an actual value
+                            <img key={Math.random(2000)} className={`w-8 h-8 rounded-full absolute ${getPosition(index, props.people.length)}`} src={person.profileImg} alt={person.name} />
                         ))}
                         {props.people.length > 3 && (
                             <span className={`w-8 h-8 flex justify-center items-center rounded-full bg-gray-600 absolute ${getPosition(3, props.people.length)} text-white text-xs`}>+{props.people.length - 3}</span>

@@ -16,19 +16,19 @@ const TabBar = () => {
     return (
         // TODO: Make sure the Z-index is correctly manipulated
         <div className="bottom-bar z-[10]">
-            <nav className="fixed h-72px bottom-0 inset-x-0 bg-[#EDEDED] flex justify-between">
-                <NavItem isSelected icon={
-                    <svg className="w-7 h-7 mx-auto" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M27.5 24.9999V15.2174C27.5001 14.5368 27.3612 13.8634 27.0919 13.2384C26.8226 12.6133 26.4285 12.0498 25.9337 11.5824L16.7175 2.87244C16.2533 2.4336 15.6388 2.18909 15 2.18909C14.3612 2.18909 13.7467 2.4336 13.2825 2.87244L4.06625 11.5824C3.57153 12.0498 3.17744 12.6133 2.90812 13.2384C2.6388 13.8634 2.49993 14.5368 2.5 15.2174V24.9999C2.5 25.663 2.76339 26.2989 3.23223 26.7677C3.70107 27.2365 4.33696 27.4999 5 27.4999H25C25.663 27.4999 26.2989 27.2365 26.7678 26.7677C27.2366 26.2989 27.5 25.663 27.5 24.9999Z" stroke="#6C6C6C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                } />
+            <nav className="fixed h-[72px] bottom-0 inset-x-0 bg-[#EDEDED] flex justify-between items-center">
                 <NavItem icon={
                     <svg className="w-7 h-7 mx-auto" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.5 23.75C22.2137 23.75 24.5712 23.75 26.035 22.285C27.5 20.8212 27.5 18.4637 27.5 13.75C27.5 9.03625 27.5 6.67875 26.035 5.215C24.5712 3.75 22.2137 3.75 17.5 3.75H12.5C7.78625 3.75 5.42875 3.75 3.965 5.215C2.5 6.67875 2.5 9.03625 2.5 13.75C2.5 18.4637 2.5 20.8212 3.965 22.285C4.78125 23.1025 5.875 23.4638 7.5 23.6225" stroke="#6C6C6C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M15 13.75V13.7625" stroke="#6C6C6C" stroke-width="2" stroke-linecap="round" />
-                        <path d="M10 13.75V13.7625" stroke="#6C6C6C" stroke-width="2" stroke-linecap="round" />
-                        <path d="M20 13.75V13.7625" stroke="#6C6C6C" stroke-width="2" stroke-linecap="round" />
-                        <path d="M17.5001 23.75C15.9551 23.75 14.2526 24.375 12.6988 25.1813C10.2013 26.4775 8.95256 27.1263 8.33756 26.7125C7.72256 26.3 7.83881 25.0188 8.07256 22.4575L8.12506 21.875" stroke="#6C6C6C" stroke-width="2" stroke-linecap="round" />
+                        <path d="M27.5 24.9999V15.2174C27.5001 14.5368 27.3612 13.8634 27.0919 13.2384C26.8226 12.6133 26.4285 12.0498 25.9337 11.5824L16.7175 2.87244C16.2533 2.4336 15.6388 2.18909 15 2.18909C14.3612 2.18909 13.7467 2.4336 13.2825 2.87244L4.06625 11.5824C3.57153 12.0498 3.17744 12.6133 2.90812 13.2384C2.6388 13.8634 2.49993 14.5368 2.5 15.2174V24.9999C2.5 25.663 2.76339 26.2989 3.23223 26.7677C3.70107 27.2365 4.33696 27.4999 5 27.4999H25C25.663 27.4999 26.2989 27.2365 26.7678 26.7677C27.2366 26.2989 27.5 25.663 27.5 24.9999Z" stroke="#6C6C6C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                } />
+                <NavItem isSelected icon={
+                    <svg className="w-7 h-7 mx-auto" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.5 23.75C22.2137 23.75 24.5712 23.75 26.035 22.285C27.5 20.8212 27.5 18.4637 27.5 13.75C27.5 9.03625 27.5 6.67875 26.035 5.215C24.5712 3.75 22.2137 3.75 17.5 3.75H12.5C7.78625 3.75 5.42875 3.75 3.965 5.215C2.5 6.67875 2.5 9.03625 2.5 13.75C2.5 18.4637 2.5 20.8212 3.965 22.285C4.78125 23.1025 5.875 23.4638 7.5 23.6225" stroke="#6C6C6C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M15 13.75V13.7625" stroke="#6C6C6C" strokeWidth="2" strokeLinecap="round" />
+                        <path d="M10 13.75V13.7625" stroke="#6C6C6C" strokeWidth="2" strokeLinecap="round" />
+                        <path d="M20 13.75V13.7625" stroke="#6C6C6C" strokeWidth="2" strokeLinecap="round" />
+                        <path d="M17.5001 23.75C15.9551 23.75 14.2526 24.375 12.6988 25.1813C10.2013 26.4775 8.95256 27.1263 8.33756 26.7125C7.72256 26.3 7.83881 25.0188 8.07256 22.4575L8.12506 21.875" stroke="#6C6C6C" strokeWidth="2" strokeLinecap="round" />
                     </svg>
                 } />
                 <NavItem icon={
