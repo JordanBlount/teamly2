@@ -23,6 +23,17 @@ countDocuments() returns a callback method with the count using a Promise. I was
 
 https://stackoverflow.com/questions/26720050/how-to-count-the-number-of-documents-in-a-mongodb-collection
 
+Optimistic concurrency 
+
+https://github.com/eoin-obrien/mongoose-update-if-current
+
+
+# Express
+
+Great explanation for parameters vs queries
+
+https://coursework.vschool.io/express-params-and-query/
+
 
 # Inspiration
 

@@ -46,7 +46,6 @@ let ChatMessageController = {
                 }
             }
             res.status(200).json(newMessage);
-            console.log(newMessage._id)
             Chat
                 .findOneAndUpdate({ _id: req.params.chatId }, { $push: { messages: newMessage._id }, $inc: { messageCount: 1 }})
                 .then(log => {});
