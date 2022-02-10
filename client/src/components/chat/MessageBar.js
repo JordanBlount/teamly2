@@ -25,7 +25,7 @@ const MessageBar = (props) => {
     const handleKeyPress = e => {
         if(e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            //sendMessage();
+            props.sendMessage(text);
             clearInput();
         }
     }

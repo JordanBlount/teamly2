@@ -7,7 +7,7 @@ import MessageBar from '../../components/chat/MessageBar';
 const ChatScreen = () => {
 
     const [data, setData] = useState({})
-    const [messages, setMessages] = useState([])
+    const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -18,22 +18,22 @@ const ChatScreen = () => {
         return <div>Loading...</div>
     }
 
+    const handleMessage = (text) => {
+        setMessages([...messages, {text}])
+    }
 
-    // FIXME: Make the NavBar and MessageBar fixed
     return <div className="flex flex-col min-h-screen">
         <NavBar />
-        {/* FIXME: This needs to stretch the full length while the other componenets are "fixed" */}
-        <MessageList msg={messages} />
-        {/* NOTE: This should be fixed instead of our component itself */}
+        <MessageList msgs={messages} />
         <div>
-            <MessageBar />
+            <MessageBar sendMessage={handleMessage}/>
         </div>
     </div>;
 };
 
 const MessageList = ({ msgs }) => {
 
-    const [messages, setMessages] = useState(['Nothing to see here.']);
+    //const [messages, setMessages] = useState(msgs);
     const [displayDay, setDisplayDay] = useState(false);
     const [dayVisible, setDayVisible] = useState(false);
     const [displayDayTimeout, setDisplayDayTimeout] = useState(500);
@@ -66,47 +66,51 @@ const MessageList = ({ msgs }) => {
         // }
     }
 
-    return <div className='relative grow bg-gray-100 px-4 overflow-y-auto h-64 flex flex-col-reverse'
+    return <div className='relative grow px-4 overflow-y-auto h-64 flex flex-col-reverse'
         onScroll={handleScroll}
         ref={messageListRef}>
 
         <div className="space-y-4 my-4">
             <MessageItem
                 myOwn
-                message="I can ask Jeff to check it out on his Samsung device.
-        sdasdasdasdasda"
+                message="I can ask Jeff to check it out on his Samsung device."
                 time="3:15PM" />
 
             <MessageItem
-                message="I am about to fix the scaling issues
-on the mobile layout. I’ll need someone to test it on a Samsung device to make sure it works now."
-                time="Now"
+                message="Today is fine."
+                time="3:20PM"
                 person={testData[0]} />
 
             <MessageItem
-                message="I am about to fix the scaling issues
-on the mobile layout. I’ll need someone to test it on a Samsung device to make sure it works now."
-                time="Now"
+                message="Can you send me more details about the implementation? I’m curious to go over it tomorrow at our meeting."
+                time="3:21PM"
                 person={testData[0]} />
 
             <MessageItem
-                message="I am about to fix the scaling issues
-on the mobile layout. I’ll need someone to test it on a Samsung device to make sure it works now."
-                time="Now"
-                person={testData[0]} />
+                myOwn
+                message="Yeah. I'll forward you the link for the current implementation."
+                time="Now" />
 
-<MessageItem
-                message="I am about to fix the scaling issues
-on the mobile layout. I’ll need someone to test it on a Samsung device to make sure it works now."
-                time="Now"
-                person={testData[0]} />
+            <SystemMessage message={'Jordan Blount was added to the chat.'}/>
 
-
-<MessageItem
-                message="I am about to fix the scaling issues
-on the mobile layout. I’ll need someone to test it on a Samsung device to make sure it works now."
+            <MessageItem
+                message="Hey Y'all!"
                 time="Now"
-                person={testData[0]} />
+                person={testData[1]} />
+            
+            <MessageItem
+                message="I have some update details on tomorrow's meeting."
+                time="Now"
+                person={testData[1]} />
+
+            {msgs.length > 0 && msgs.map((msg, index) => (
+                // FIXME: Add an actual key here
+                <MessageItem key={Math.random(2000)}
+                    myOwn
+                    message={msg.text}
+                    time={"Now"}/>
+            ))}
+
         </div>
 
         <div className="top-notifications">
@@ -131,8 +135,14 @@ const MessageItem = ({ myOwn, message, sender, time, person }) => {
                 {/* FIXME: Word wrapping to make sure that this wraps correctly */}
                 <p className="break-normal leading-snug">{message}</p>
             </div>
-            <p className="text-[#BDBDBD] text-sm">{time}</p>
+            <p className="text-[#BDBDBD] text-sm mt-1">{time}</p>
         </div>
+    </div>
+}
+
+const SystemMessage = ({ message }) => {
+    return <div className={`flex justify-center`}>
+        <span className={`text-[#4B4B4B]`}>{message}</span>
     </div>
 }
 
@@ -140,6 +150,10 @@ const testData = [
     {
         name: "Gloria Hopkins",
         profileImg: "https://randomuser.me/api/portraits/women/75.jpg",
+    },
+    {
+        name: "Jordan Blount",
+        profileImg: "https://randomuser.me/api/portraits/men/59.jpg"
     }
 ]
 
@@ -151,7 +165,7 @@ const NavBar = (props) => {
             <div className="mx-4 h-full flex justify-between">
                 <div className="flex items-center">
                     <Back />
-                    <ChatInfo people={testData} status="Online" />
+                    <ChatInfo isGroup people={testData} status="Online" />
                 </div>
                 <ChatOptions onClick={() => alert("This was clicked")} />
             </div>
@@ -174,7 +188,7 @@ const ChatInfo = ({ people, isTeam, teamName, isGroup, status }) => {
                 <p className="font-bold text-lg text-[#4B4B4B] leading-tight overflow-hidden whitespace-nowrap overflow-ellipsis w-64 sm:w-full">{teamName}</p>
             }
             {isGroup &&
-                <p className="font-bold text-lg text-[#4B4B4B] leading-tight overflow-hidden whitespace-nowrap overflow-ellipsis w-64 sm:w-full">{renderNames()}</p>
+                <p className="font-bold text-lg text-[#4B4B4B] leading-tight overflow-hidden whitespace-nowrap overflow-ellipsis w-36 sm:w-full">{renderNames()}</p>
             }
             {!isTeam && !isGroup &&
                 <p className="font-bold text-lg text-[#4B4B4B] leading-tight overflow-hidden whitespace-nowrap overflow-ellipsis w-64 sm:w-full">{people[0].name}</p>
