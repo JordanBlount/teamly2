@@ -23,31 +23,118 @@ const ChatScreen = () => {
     return <div className="flex flex-col min-h-screen">
         <NavBar />
         {/* FIXME: This needs to stretch the full length while the other componenets are "fixed" */}
-        <div className='relative grow bg-gray-200'>
-            {messages.length > 0 ? (
-                <div className="px-4 grid grid-cols-1">
-
-                </div>
-            ) : (
-                // <div className="fixed flex left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                //     Nothing to see here
-                // </div>
-                <div 
-                    className="px-4 flex items-center justify-center"
-                    onScroll={() => console.log("I am scrolling")}>
-                </div>
-            )}
-            {/* TODO: Add data here */}
-            <span className="absolute hidden top-3 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-1 rounded-full">
-                Today
-            </span>
-        </div>
+        <MessageList msg={messages} />
         {/* NOTE: This should be fixed instead of our component itself */}
         <div>
             <MessageBar />
         </div>
     </div>;
 };
+
+const MessageList = ({ msgs }) => {
+
+    const [messages, setMessages] = useState(['Nothing to see here.']);
+    const [displayDay, setDisplayDay] = useState(false);
+    const [dayVisible, setDayVisible] = useState(false);
+    const [displayDayTimeout, setDisplayDayTimeout] = useState(500);
+    const messageListRef = useRef(null);
+    const dayRef = useRef(null);
+
+    // FIXME: Make sure that this does not cause glitches while scrolling
+    useEffect(() => {
+        let timer = null;
+
+        if (displayDay) {
+            timer = setTimeout(() => {
+                setDisplayDay(false);
+                dayRef.current.classList.add('hidden')
+            }, displayDayTimeout)
+        }
+        return () => clearTimeout(timer);
+    }, [displayDay])
+
+    // NOTE: Sets the message list to start at the end. This is a big glitchy
+    useEffect(() => {
+        messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    }, [])
+
+    // TODO: We want to make this watch for when we are scrolling so that we can display messages at the top
+    const handleScroll = () => {
+        // setDisplayDay(true);
+        // if(displayDay) {
+        //     dayRef.current.classList.remove('hidden')
+        // }
+    }
+
+    return <div className='relative grow bg-gray-100 px-4 overflow-y-auto h-64 flex flex-col-reverse'
+        onScroll={handleScroll}
+        ref={messageListRef}>
+
+        <div className="space-y-4 my-4">
+            <MessageItem
+                myOwn
+                message="I can ask Jeff to check it out on his Samsung device.
+        sdasdasdasdasda"
+                time="3:15PM" />
+
+            <MessageItem
+                message="I am about to fix the scaling issues
+on the mobile layout. I’ll need someone to test it on a Samsung device to make sure it works now."
+                time="Now"
+                person={testData[0]} />
+
+            <MessageItem
+                message="I am about to fix the scaling issues
+on the mobile layout. I’ll need someone to test it on a Samsung device to make sure it works now."
+                time="Now"
+                person={testData[0]} />
+
+            <MessageItem
+                message="I am about to fix the scaling issues
+on the mobile layout. I’ll need someone to test it on a Samsung device to make sure it works now."
+                time="Now"
+                person={testData[0]} />
+
+<MessageItem
+                message="I am about to fix the scaling issues
+on the mobile layout. I’ll need someone to test it on a Samsung device to make sure it works now."
+                time="Now"
+                person={testData[0]} />
+
+
+<MessageItem
+                message="I am about to fix the scaling issues
+on the mobile layout. I’ll need someone to test it on a Samsung device to make sure it works now."
+                time="Now"
+                person={testData[0]} />
+        </div>
+
+        <div className="top-notifications">
+            <span
+                className="fixed hidden top-[6.75rem] left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-1 rounded-full"
+                ref={dayRef}>
+                Today
+            </span>
+        </div>
+    </div>
+
+}
+
+const MessageItem = ({ myOwn, message, sender, time, person }) => {
+    return <div className={`flex ${myOwn ? 'justify-end' : ''} `}>
+        {!myOwn &&
+            <img className="rounded-full w-8 h-8 mr-2 self-end"
+                src={person.profileImg} />
+        }
+        <div className={`flex flex-col ${myOwn ? 'items-end' : ''}`}>
+            <div className={`${myOwn ? 'text-white' : 'text-[#4B4B4B]'} ${myOwn ? 'bg-[#4B5078]' : 'bg-[#EBEBEB]'} border border-[#DDDDDD] rounded-lg py-1 px-2 max-w-xs`}>
+                {/* FIXME: Word wrapping to make sure that this wraps correctly */}
+                <p className="break-normal leading-snug">{message}</p>
+            </div>
+            <p className="text-[#BDBDBD] text-sm">{time}</p>
+        </div>
+    </div>
+}
 
 const testData = [
     {
@@ -64,16 +151,16 @@ const NavBar = (props) => {
             <div className="mx-4 h-full flex justify-between">
                 <div className="flex items-center">
                     <Back />
-                    <ChatInfo people={testData} status="Online"/>
+                    <ChatInfo people={testData} status="Online" />
                 </div>
-            <ChatOptions onClick={() => alert("This was clicked")}/>
+                <ChatOptions onClick={() => alert("This was clicked")} />
             </div>
         </div>
     </header>
 }
 
 const ChatInfo = ({ people, isTeam, teamName, isGroup, status }) => {
-    
+
     const [currentStatus, setCurrentStatus] = useState(!status ? '' : status)
 
     const renderNames = () => {
@@ -86,11 +173,11 @@ const ChatInfo = ({ people, isTeam, teamName, isGroup, status }) => {
             {isTeam &&
                 <p className="font-bold text-lg text-[#4B4B4B] leading-tight overflow-hidden whitespace-nowrap overflow-ellipsis w-64 sm:w-full">{teamName}</p>
             }
-            {isGroup && 
+            {isGroup &&
                 <p className="font-bold text-lg text-[#4B4B4B] leading-tight overflow-hidden whitespace-nowrap overflow-ellipsis w-64 sm:w-full">{renderNames()}</p>
             }
             {!isTeam && !isGroup &&
-                <p className="font-bold text-lg text-[#4B4B4B] leading-tight overflow-hidden whitespace-nowrap overflow-ellipsis w-64 sm:w-full">{people[0].name}</p>    
+                <p className="font-bold text-lg text-[#4B4B4B] leading-tight overflow-hidden whitespace-nowrap overflow-ellipsis w-64 sm:w-full">{people[0].name}</p>
             }
             {/* TODO: Data needs to be rendered here */}
             <p className="text-small text-[#4B4B4B] leading-tight">{currentStatus}</p>
@@ -101,7 +188,7 @@ const ChatInfo = ({ people, isTeam, teamName, isGroup, status }) => {
 const ChatOptions = ({ onClick }) => {
     return <>
         <div className="flex items-center">
-            <button 
+            <button
                 className='w-[44px] h-[44px] flex justify-center items-center'
                 onClick={onClick}>
                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -5,6 +5,7 @@ const MessageBar = (props) => {
     const [text, setText] = useState('');
     const inputRef = useRef(null);
 
+    // FIXME: Make sure that scrollbars appear when this gets to big.
     const autoSize = () => {
         const input = inputRef.current;
         if (!input) return;
