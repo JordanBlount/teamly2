@@ -20,7 +20,7 @@ These were all created using Figma. I spent about 2 hours trying to get ideas ou
   
 ## Tech Stack
 
-**Client:** React.js, TailwindCSS, React Router, Redux
+**Client:** React.js, TailwindCSS, React Router, React Query, Jotai
 
 **Server:** MongoDB, Express, Pusher (realtime features) 
 

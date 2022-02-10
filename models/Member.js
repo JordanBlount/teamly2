@@ -9,7 +9,15 @@ const MemberSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    teams: [],
+    teams: [
+        {
+            teamId: {
+                type: mongoose.Types.ObjectId,
+                ref: "Team"
+            }, 
+            roles: {}
+        }
+    ],
     chatCount: {
         type: Number,
         default: 0
@@ -29,6 +37,9 @@ const MemberSchema = new mongoose.Schema({
     _organizationId: {
         type: mongoose.Types.ObjectId,
         ref: "Organization"
+    },
+    org_roles: {
+        
     }
     // name: String,
     // email: String,
