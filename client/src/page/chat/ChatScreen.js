@@ -19,14 +19,14 @@ const ChatScreen = () => {
     }
 
     const handleMessage = (text) => {
-        setMessages([...messages, {text}])
+        setMessages([...messages, { text }])
     }
 
     return <div className="flex flex-col min-h-screen">
         <NavBar />
         <MessageList msgs={messages} />
         <div>
-            <MessageBar sendMessage={handleMessage}/>
+            <MessageBar sendMessage={handleMessage} />
         </div>
     </div>;
 };
@@ -69,6 +69,13 @@ const MessageList = ({ msgs }) => {
     return <div className='relative grow px-4 overflow-y-auto h-64 flex flex-col-reverse'
         onScroll={handleScroll}
         ref={messageListRef}>
+        <div className="top-notifications">
+            <span
+                className="fixed hidden top-[6.75rem] left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-1 rounded-full"
+                ref={dayRef}>
+                Today
+            </span>
+        </div>
 
         <div className="space-y-4 my-4">
             <MessageItem
@@ -91,13 +98,13 @@ const MessageList = ({ msgs }) => {
                 message="Yeah. I'll forward you the link for the current implementation."
                 time="Now" />
 
-            <SystemMessage message={'Jordan Blount was added to the chat.'}/>
+            <SystemMessage message={'Jordan Blount was added to the chat.'} />
 
             <MessageItem
                 message="Hey Y'all!"
                 time="Now"
                 person={testData[1]} />
-            
+
             <MessageItem
                 message="I have some update details on tomorrow's meeting."
                 time="Now"
@@ -108,17 +115,12 @@ const MessageList = ({ msgs }) => {
                 <MessageItem key={Math.random(2000)}
                     myOwn
                     message={msg.text}
-                    time={"Now"}/>
+                    time={"Now"} />
             ))}
 
-        </div>
-
-        <div className="top-notifications">
-            <span
-                className="fixed hidden top-[6.75rem] left-1/2 -translate-x-1/2 bg-gray-800 text-white px-4 py-1 rounded-full"
-                ref={dayRef}>
-                Today
-            </span>
+            <div>
+                {/* TODO: Add a typing indicator here.... */}
+            </div>
         </div>
     </div>
 
