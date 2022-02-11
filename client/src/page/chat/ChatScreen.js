@@ -19,7 +19,10 @@ const ChatScreen = () => {
     }
 
     const handleMessage = (text) => {
-        setMessages([...messages, { text }])
+        setMessages([...messages, { 
+            id: 10,
+            text 
+        }])
     }
 
     return <div className="flex flex-col min-h-screen">
@@ -86,7 +89,9 @@ const MessageList = ({ msgs }) => {
             <MessageItem
                 message="Today is fine."
                 time="3:20PM"
-                person={testData[0]} />
+                person={testData[0]}
+                showTime={false} 
+                sameSender={true} />
 
             <MessageItem
                 message="Can you send me more details about the implementation? I’m curious to go over it tomorrow at our meeting."
@@ -103,7 +108,9 @@ const MessageList = ({ msgs }) => {
             <MessageItem
                 message="Hey Y'all!"
                 time="Now"
-                person={testData[1]} />
+                person={testData[1]} 
+                showTime={false}
+                sameSender={true}/>
 
             <MessageItem
                 message="I have some update details on tomorrow's meeting."
@@ -115,7 +122,9 @@ const MessageList = ({ msgs }) => {
                 <MessageItem key={Math.random(2000)}
                     myOwn
                     message={msg.text}
-                    time={"Now"} />
+                    time={"Now"} 
+                    showTime={msgs[index - 1]?.id === msg.id && index !== msgs.length - 1 ? false : true || index === 0 && msgs[0].id === msgs[1]?.id ? false : true}
+                    sameSender={msgs[index - 1]?.id === msg.id}/>
             ))}
 
             <div>
@@ -126,18 +135,22 @@ const MessageList = ({ msgs }) => {
 
 }
 
-const MessageItem = ({ myOwn, message, sender, time, person }) => {
-    return <div className={`flex ${myOwn ? 'justify-end' : ''} `}>
-        {!myOwn &&
+const MessageItem = ({ myOwn, message, time, person, showTime = true, sameSender = false }) => {
+    // NOTE: Using '!mt-0.5' to specify "important" is not the best solution. I am going to change the spacing on this
+    return <div className={`flex ${myOwn ? 'justify-end' : ''} ${sameSender ? '!mt-0.5 !mb-0.5' : ''}`}>
+        {!myOwn && !sameSender &&
             <img className="rounded-full w-8 h-8 mr-2 self-end"
                 src={person.profileImg} />
         }
-        <div className={`flex flex-col ${myOwn ? 'items-end' : ''}`}>
+        <div className={`flex flex-col ${!myOwn && sameSender ? 'ml-[40px]' : ''} ${myOwn ? 'items-end' : ''}`}>
             <div className={`${myOwn ? 'text-white' : 'text-[#4B4B4B]'} ${myOwn ? 'bg-[#4B5078]' : 'bg-[#EBEBEB]'} border border-[#DDDDDD] rounded-lg py-1 px-2 max-w-xs`}>
                 {/* FIXME: Word wrapping to make sure that this wraps correctly */}
-                <p className="break-normal leading-snug">{message}</p>
+                {/* We need a character limit instead of just a word limit */}
+                <p className="break-words leading-snug">{message}</p>
             </div>
-            <p className="text-[#BDBDBD] text-sm mt-1">{time}</p>
+            {showTime && 
+                <p className="text-[#BDBDBD] text-sm mt-1">{time}</p>
+            }
         </div>
     </div>
 }
@@ -156,6 +169,10 @@ const testData = [
     {
         name: "Jordan Blount",
         profileImg: "https://randomuser.me/api/portraits/men/59.jpg"
+    },
+    {
+        name: "Sam Smith",
+        profileImg: "https://randomuser.me/api/portraits/men/78.jpg"
     }
 ]
 
