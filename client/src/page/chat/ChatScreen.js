@@ -61,6 +61,12 @@ const MessageList = ({ msgs }) => {
         messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
     }, [])
 
+    // NOTE: This is a temp fix to make it so that when a new message is added (based on the length), it will scroll to the bottom. An example,
+    // may be if you are at some random place in the message list and you send a message. It will push you to the bottom. Add a better fix.
+    useEffect(() => {
+        messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    }, [msgs.length])
+
     // TODO: We want to make this watch for when we are scrolling so that we can display messages at the top
     const handleScroll = () => {
         // setDisplayDay(true);
